@@ -1,0 +1,712 @@
+/* Modern CSS Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+:root {
+  --primary-color: #2563eb;
+  --primary-hover: #1d4ed8;
+  --background-color: #f8fafc;
+  --sidebar-color: #ffffff;
+  --text-color: #1e293b;
+  --text-secondary: #64748b;
+  --border-color: #e2e8f0;
+  --message-user-bg: #f1f5f9;
+  --message-ai-bg: #ffffff;
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1.5;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  width: 100%;
+  height: 100%;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+/* App Container */
+.app-container {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  height: 100vh;
+  background-color: var(--background-color);
+  width: 100%;
+  min-height: 100%;
+}
+
+/* Sidebar */
+.sidebar {
+  background-color: var(--sidebar-color);
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 300px;
+  flex-shrink: 0;
+}
+
+.sidebar-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.sidebar-header h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.sidebar-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.sidebar-actions button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  background-color: var(--sidebar-color);
+  color: var(--text-color);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.sidebar-actions button:hover {
+  background-color: var(--background-color);
+}
+
+.sidebar-actions button svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.conversations-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem;
+}
+
+.conversation-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.conversation-item:hover {
+  background-color: var(--background-color);
+}
+
+.conversation-item.active {
+  background-color: var(--background-color);
+}
+
+.conversation-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.conversation-content h3 {
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.conversation-content p {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.delete-btn {
+  padding: 0.25rem;
+  border: none;
+  background: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  opacity: 0;
+  transition: all 0.2s;
+}
+
+.delete-btn svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.conversation-item:hover .delete-btn {
+  opacity: 1;
+}
+
+.delete-btn:hover {
+  color: #ef4444;
+}
+
+/* Chat Container */
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  height: 100vh;
+  background-color: #f8f9fa;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Chat Header */
+.chat-header {
+  padding: 1.5rem;
+  background-color: white;
+  border-bottom: 1px solid #e9ecef;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.logo-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  color: var(--primary-color);
+}
+
+.logo-container h1 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin: 0;
+}
+
+.slogan {
+  font-size: 1rem;
+  color: #6c757d;
+  margin: 0;
+  font-style: italic;
+}
+
+/* Chat Messages */
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  height: calc(100vh - 180px); /* Account for header and input form height */
+}
+
+.empty-state {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  color: var(--text-secondary);
+  width: 100%;
+  height: 100%;
+}
+
+.empty-state svg {
+  width: 3rem;
+  height: 3rem;
+  color: var(--text-secondary);
+  opacity: 0.5;
+}
+
+.message {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+  max-width: 100%;
+}
+
+.message.user-message {
+  flex-direction: row-reverse;
+  margin-left: auto;
+}
+
+.message.ai-message {
+  margin-right: auto;
+}
+
+.message-avatar {
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--radius-sm);
+  background-color: var(--message-user-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.message-avatar svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: var(--text-secondary);
+}
+
+.message.ai-message .message-avatar {
+  background-color: var(--primary-color);
+}
+
+.message.ai-message .message-avatar svg {
+  color: white;
+}
+
+.message-content {
+  display: inline-block;
+  max-width: 85%;
+  padding: 1rem;
+  border-radius: var(--radius-lg);
+  background-color: var(--message-user-bg);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+.message.user-message .message-content {
+  background-color: var(--primary-color);
+  color: white;
+  margin-left: auto;
+}
+
+.message.ai-message .message-content {
+  background-color: var(--message-ai-bg);
+  border: 1px solid var(--border-color);
+  margin-right: auto;
+}
+
+.message-content p {
+  margin-bottom: 0.5rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+.message-content p:last-child {
+  margin-bottom: 0;
+}
+
+/* Message Formatting */
+.main-content {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+.major-section {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+.subsection {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+.sub-subsection {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+.sub-sub-subsection {
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+.sub-sub-sub-subsection {
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+/* List styles with text wrapping */
+.bullet-list {
+  margin: 0.5rem 0;
+  padding-left: 1.5rem;
+  list-style: none;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.bullet-list li {
+  margin-bottom: 0.25rem;
+  position: relative;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+.bullet-list li:last-child {
+  margin-bottom: 0;
+}
+
+/* Level 1 bullets (outermost) */
+.bullet-list li[style*="listStyleType: disc"] {
+  list-style: none;
+}
+
+.bullet-list li[style*="listStyleType: disc"]::before {
+  content: "•";
+  position: absolute;
+  left: -1.25rem;
+  color: var(--primary-color);
+  font-size: 1.2em;
+}
+
+/* Level 2 bullets (first nested) */
+.bullet-list li[style*="listStyleType: circle"] {
+  list-style: none;
+}
+
+.bullet-list li[style*="listStyleType: circle"]::before {
+  content: "◦";
+  position: absolute;
+  left: -1.25rem;
+  color: var(--primary-color);
+  font-size: 1.1em;
+}
+
+/* Level 3 bullets (second nested) */
+.bullet-list li[style*="listStyleType: square"] {
+  list-style: none;
+}
+
+.bullet-list li[style*="listStyleType: square"]::before {
+  content: "▪";
+  position: absolute;
+  left: -1.25rem;
+  color: var(--primary-color);
+  font-size: 1em;
+}
+
+/* Level 4 bullets (third nested) */
+.bullet-list li[style*="listStyleType: disc"] li[style*="listStyleType: disc"] {
+  list-style: none;
+}
+
+.bullet-list li[style*="listStyleType: disc"] li[style*="listStyleType: disc"]::before {
+  content: "▫";
+  position: absolute;
+  left: -1.25rem;
+  color: var(--primary-color);
+  font-size: 0.9em;
+}
+
+/* Numbered list styles */
+.number-list {
+  margin: 0.5rem 0;
+  padding-left: 1.5rem;
+  list-style: decimal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.number-list li {
+  margin-bottom: 0.25rem;
+  position: relative;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+.number-list li:last-child {
+  margin-bottom: 0;
+}
+
+.number-list li::marker {
+  color: var(--primary-color);
+  font-weight: 500;
+}
+
+/* Nested content under list items */
+.bullet-list li p,
+.number-list li p {
+  margin: 0.5rem 0;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.bullet-list li p::before,
+.number-list li p::before {
+  content: "→";
+  position: absolute;
+  left: 0.5rem;
+  color: var(--primary-color);
+  font-size: 1.1em;
+}
+
+/* Regular text with indentation */
+p[style*="paddingLeft: 1rem"] {
+  position: relative;
+  padding-left: 2rem !important;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-secondary);
+}
+
+p[style*="paddingLeft: 1rem"]::before {
+  content: "→";
+  position: absolute;
+  left: 0.5rem;
+  color: var(--primary-color);
+  font-size: 1.1em;
+}
+
+/* Nested content styling */
+.bullet-list li p p,
+.number-list li p p,
+p[style*="paddingLeft: 1rem"] p {
+  position: relative;
+  padding-left: 2rem !important;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.bullet-list li p p::before,
+.number-list li p p::before,
+p[style*="paddingLeft: 1rem"] p::before {
+  content: "•";
+  position: absolute;
+  left: 0.5rem;
+  color: var(--primary-color);
+  font-size: 1em;
+}
+
+/* Chat Input */
+.chat-input-form {
+  padding: 1.5rem;
+  border-top: 1px solid var(--border-color);
+  background-color: var(--sidebar-color);
+  display: flex;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+.chat-input-form input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-size: 0.875rem;
+  transition: all 0.2s;
+}
+
+.chat-input-form input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
+}
+
+.chat-input-form button {
+  padding: 0.75rem;
+  border: none;
+  border-radius: var(--radius-lg);
+  background-color: var(--primary-color);
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chat-input-form button:hover:not(:disabled) {
+  background-color: var(--primary-hover);
+}
+
+.chat-input-form button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.chat-input-form button svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.loading-icon {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Loading Indicator */
+.loading-indicator {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+}
+
+.loading-indicator .dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  background-color: var(--text-secondary);
+  border-radius: 50%;
+  animation: bounce 1.4s infinite ease-in-out;
+}
+
+.loading-indicator .dot:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.loading-indicator .dot:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+@keyframes bounce {
+  0%, 80%, 100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1);
+  }
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+
+.modal {
+  background-color: var(--sidebar-color);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 32rem;
+  box-shadow: var(--shadow-md);
+}
+
+.modal h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.modal p {
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: flex-end;
+}
+
+.modal-actions button {
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.modal-actions .confirm-btn {
+  background-color: #ef4444;
+  color: white;
+  border: none;
+}
+
+.modal-actions .confirm-btn:hover {
+  background-color: #dc2626;
+}
+
+.modal-actions .cancel-btn {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+}
+
+.modal-actions .cancel-btn:hover {
+  background-color: var(--border-color);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .app-container {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    display: none;
+  }
+}
