@@ -16,7 +16,7 @@ const formatText = (text) => {
   const processList = () => {
     if (currentListItems.length > 0) {
       formattedElements.push(
-        <ul key={formattedElements.length} className="bullet-list">
+        <ul key={`list-${formattedElements.length}-${Date.now()}`} className="bullet-list">
           {currentListItems}
         </ul>
       );
@@ -30,7 +30,7 @@ const formatText = (text) => {
       const firstNumber = currentNumberedItems[0].props['data-number'];
       formattedElements.push(
         <ol 
-          key={formattedElements.length} 
+          key={`numbered-list-${formattedElements.length}-${Date.now()}`} 
           className="number-list"
           start={firstNumber}
         >
